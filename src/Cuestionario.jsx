@@ -21,9 +21,10 @@ export default function Cuestionario(){
             }
         ]
     }
+
     const defaultValues={
         // ? SECTION 1
-        s1_q1: { value:'', required:false,},
+        s1_q1: { value:'data', required:false,},
         s1_q2: { value:'', required:false, },
 
         // ? SECTION 2
@@ -242,28 +243,35 @@ export default function Cuestionario(){
 
         ]
     );
+    
     const handleChange = (e) => {
-        const { id, value } = e.target;
-        setValueForm(e => ({
+        const{id, value}=e.target
+        console.log(valueForm);
+        console.log(id);
+        console.log(value);
+        setValueForm(prevFormData=> ({
             ...prevFormData,
-            [id]: value,
-        }));
+            [id]:value
+        }))
+        // const { name, value } = e.target;
+        // setValueForm(prevFormData => ({
+        //     ...prevFormData, 
+        //     [name]: value
+        // }));
     };
 
     const renderField = (field, fieldKey)=>{
         const fieldId= field.id;
         const fieldName= field.name;
         const fieldType= field.type;
+        
 
-        const fieldState=valueForm[fieldId];
+        // if (!fieldState) {
+        //     console.error(`Campo no definido en defaultValues: ${fieldId}`);
+        //     return null; 
+        // }
 
-        if (!fieldState) {
-            console.error(`Campo no definido en defaultValues: ${fieldId}`);
-            return null; 
-        }
-
-        let currentValue = fieldState.value;
-        const required = fieldState.required;
+        // const required = fieldState.required;
         
         let inputType = 'text';
 
@@ -291,7 +299,7 @@ export default function Cuestionario(){
                         type="radio"
                         id={fieldId} 
                         name={fieldName} 
-                        required={required}
+                        // required={required}
                     />
                     <label htmlFor={fieldName}>{field.label}</label>
                 </div>
@@ -306,8 +314,8 @@ export default function Cuestionario(){
                     id={fieldId}
                     name={fieldName} 
                     placeholder={field.label}
-                    value={currentValue}
-                    required={required}
+                    // value={valueForm.fieldId}
+                    // required={required}
                     onChange={handleChange}
                     className="mcb-input" 
                     pattern={fieldType === 'numberber' || fieldType === 'number' ? '[0-9]*' : undefined} 
