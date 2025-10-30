@@ -9,7 +9,9 @@
     gap: 20px;
     
 }
-
+ol, ul{
+    margin-left: 1rem;
+}
 @media screen and (max-width: 1301px) {
     .mcb-grid-4{
         grid-template-columns: repeat(3, 1fr);
