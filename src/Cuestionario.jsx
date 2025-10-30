@@ -4,8 +4,6 @@ import { AddButton } from './assets/components/AddButton';
 
 export default function Cuestionario(){
     const solicitante={
-        fields:[
-            {
             s2_q1: { value:'', required:false, },
             s2_q2: { value:'', required:false, },
             s2_q3: { value:'', required:false, },
@@ -18,8 +16,6 @@ export default function Cuestionario(){
             s2_q9: { value:'', required:false, },
             s2_q10: { value:'', required:false, },
             s2_q11: { value:'', required:false, },
-            }
-        ]
     }
 
     const defaultValues={
@@ -246,30 +242,26 @@ export default function Cuestionario(){
     
     const handleChange = (e) => {
         const{id, value}=e.target
-        console.log(valueForm);
-        console.log(id);
         console.log(value);
         setValueForm(prevFormData=> ({
             ...prevFormData,
             [id]:value
         }))
-        // const { name, value } = e.target;
-        // setValueForm(prevFormData => ({
-        //     ...prevFormData, 
-        //     [name]: value
-        // }));
     };
 
     const renderField = (field, fieldKey)=>{
         const fieldId= field.id;
         const fieldName= field.name;
         const fieldType= field.type;
+        let fieldState=valueForm[fieldId];
         
 
-        // if (!fieldState) {
-        //     console.error(`Campo no definido en defaultValues: ${fieldId}`);
-        //     return null; 
-        // }
+        if (!fieldState) {
+            console.error(`Campo no definido en defaultValues: ${fieldId}`);
+            return null; 
+        }
+
+        const fieldValue = fieldState.value;
 
         // const required = fieldState.required;
         
@@ -314,9 +306,9 @@ export default function Cuestionario(){
                     id={fieldId}
                     name={fieldName} 
                     placeholder={field.label}
-                    // value={valueForm.fieldId}
+                    value={fieldValue}
                     // required={required}
-                    onChange={handleChange}
+                    onChange={(e)=>handleChange(e)}
                     className="mcb-input" 
                     pattern={fieldType === 'numberber' || fieldType === 'number' ? '[0-9]*' : undefined} 
                 />
