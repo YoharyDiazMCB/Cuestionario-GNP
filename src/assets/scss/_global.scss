@@ -4,7 +4,7 @@
     --color-accent:#ee2059;
     --accent-hov:#cb1044;
 
-    --blue-1:hsl(208, 100%, 40%);
+    --blue-1:#006dcc;
     --cta-color-0: #0071e3;
     --cta-color-1: #0d539b;
 
@@ -164,6 +164,9 @@ a:hover{
 .mcb-jc-sb{
     justify-content: space-between;
 }
+.mcb-jc-fe{
+    justify-content: flex-end;
+}
 
 /* ! padding */
 .mcb-pd-10{
@@ -294,6 +297,15 @@ a:hover{
     background-color: var(--color-green);
     &:hover{
         background-color: #678828;
+    }
+}
+
+.mcb-gray-btn{
+    @include base-btn;
+    color: #fff;
+    background-color: #999999;
+    &:hover{
+        background-color: #666666;
     }
 }
 /* ! GAP */

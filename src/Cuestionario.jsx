@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './assets/scss/_GNPForm.scss'
 import { AddButton } from './assets/components/AddButton';
-import { FormStepper } from './assets/components/FormStepper';
+import MagicForm from './assets/components/MagicForms';
 export default function Cuestionario(){
     const solicitante={
             s2_q1: { value:'', required:false, },
@@ -304,7 +304,7 @@ export default function Cuestionario(){
             id=idOpt;
 
         }
-        // console.log('value: '+value);
+        
         setValueForm(prevFormData=> ({
             ...prevFormData,
             [id]:{value:value, required:prevFormData[id].required}
@@ -451,7 +451,7 @@ export default function Cuestionario(){
 
     return(
         <main className='mcb-flex-c mcb-gap-20'><h1 className='mcb-txt-c'>Cuestionario Médico de Seguro Colectivo</h1>
-        <FormStepper></FormStepper>
+        <MagicForm></MagicForm>
             {sections.map((sectionData, sectionIndex) => (
                 <section className='mcb-card' key={sectionIndex}>
                     {sectionData.section === 's1' && (
@@ -527,7 +527,7 @@ export default function Cuestionario(){
                                     <li key={optionIndex}>{option.label}</li>
                                 ))}
                             </ol>
-                            { valueForm.s3_q1.value === true && (
+                            { valueForm.s3_q1.value === 'true' && (
                                 <>
                                     <p className='mcb-color-b3'>Proporcione la siguiente información</p>
                                     <article className="mcb-grid-4">
