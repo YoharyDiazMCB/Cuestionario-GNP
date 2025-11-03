@@ -1,7 +1,7 @@
 .mcb-grid-4{
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    gap: 30px;
+    gap: 20px;
 }
 .mcb-grid-2{
     display: grid;
@@ -12,6 +12,7 @@
 ol, ul{
     margin-left: 1rem;
 }
+
 @media screen and (max-width: 1301px) {
     .mcb-grid-4{
         grid-template-columns: repeat(3, 1fr);

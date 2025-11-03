@@ -273,14 +273,18 @@ a:hover{
 @mixin base-btn{
     cursor: pointer;
     border: none;
+    font-family: var(--body-font);
+    font-size: 0.875rem;
     font-weight: 600;
     padding: 10px;
-    border-radius: var(--radius-btn);
-    font-family: var(--body-font);
     width: fit-content;
     height: fit-content;
+    border-radius: var(--radius-btn);
     transition: var(--transition-1);
 
+    @media screen and (max-width: 601px) {
+        padding: 6px 12px; 
+    }
 }
 .mcb-cta-btn{
     @include base-btn;
@@ -306,6 +310,15 @@ a:hover{
     background-color: #999999;
     &:hover{
         background-color: #666666;
+    }
+}
+
+.mcb-red-btn{
+    @include base-btn;
+    color: #fff;
+    background-color: var(--red);
+    &:hover{
+        background-color: var(--red-2);
     }
 }
 /* ! GAP */

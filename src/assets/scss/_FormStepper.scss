@@ -34,9 +34,7 @@
     }
 }
 
-.mcb-step-w-btn{
-    width: 162px;
-}
+
 @media screen and (max-width: 1101px) {
     .mcb-step-l{
         width: 60px;
@@ -58,7 +56,7 @@
     .mcb-step-l{
         width: 20px;
     }
-    .mcb-step-w-btn{
+    .mcb-step-control-btn{
         width: auto !important;
         justify-content: center;
     }

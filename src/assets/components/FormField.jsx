@@ -3,11 +3,11 @@ import React from "react";
 export default function FormField({ 
     fieldData, 
     fieldKey, 
-    fieldValue, 
+    fieldValue,
     handleChange // La función del padre (setValueForm) para actualizar el estado
 }) {
     
-    const { id: fieldId, name: fieldName, type: fieldType, label } = fieldData;
+    const { id: fieldId, name: fieldName, type: fieldType, label, radioOptions } = fieldData;
     
     let inputType = 'text';
     
@@ -26,7 +26,28 @@ export default function FormField({
             break;
     }
     
-    
+    if((fieldType === 'radioOptions')){
+        return (
+            <fieldset className="mcb-field">
+                <p className="mcb-label">{label}</p>
+                <div className="mcb-flex mcb-gap-20">
+                    {radioOptions.map((i, index)=>(
+                        <div key={index} className="mcb-flex mcb-gap-5">
+                            <input 
+                                type="radio"
+                                id={i.id} 
+                                name={fieldName} 
+                                // value={label === 'Si' ? true : false}
+                                // onChange={handleChange} // El padre manejará el target.name/id
+                                // checked={fieldValue === (label === 'Si' ? true : false)}
+                            />
+                            <label htmlFor="">{i.label}</label>
+                        </div>
+                    ))}
+                </div>
+            </fieldset>
+        )
+    }
 
     if (fieldType === 'radio') {
         return (
