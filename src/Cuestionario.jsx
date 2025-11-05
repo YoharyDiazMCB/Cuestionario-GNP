@@ -203,38 +203,8 @@ export default function Cuestionario(){
             {
                 section:'s4',
                 title:'IV. Información Médica',
-                questions:[
-                    { question:'¿Algún Solicitante padece o ha padecido alguna enfermedad como?: Hipertensión arterial, infarto, hepatitis, diabetes, epilepsia, esclerosis, fiebre reumática, SIDA, cáncer, tumores, enfermedades mentales, pulmonares, renales, neurológicas y cardiovasculares',
-                        fields:[
-                            { name:'s4_q1', id: 's4_q1_1', label: 'Si', type: 'radio' },
-                            { name:'s4_q1', id: 's4_q1_2', label: 'No', type: 'radio' },
-                        ]
-                    },
-                    { question:'¿Algún Solicitante ha sido hospitalizado, o le han hecho alguna cirugía (incluyendo cirugías ambulatorias) por cualquier enfermedad o accidente?',
-                        fields:[
-                            { name:'s4_q2', id: 's4_q2_1', label: 'Si', type: 'radio' },
-                            { name:'s4_q2', id: 's4_q2_2', label: 'No', type: 'radio' },
-                        ]
-                    },
-                    { question:'¿Algún Solicitante adece alguna enfermedad no referida en el apartado 1, está en tratamiento, tiene programada atención médica',
-                        fields:[
-                            { name:'s4_q3', id: 's4_q3_1', label: 'Si', type: 'radio' },
-                            { name:'s4_q3', id: 's4_q3_2', label: 'No', type: 'radio' },
-                        ]
-                    },
-                ],
-                fields:[ 
-                    { id:'s4_q5_1', label:'Solicitante', type:'select', },
-                    { id:'s4_q5_2', label:'Enfermedad o accidente', type:'text', },
-                    { id:'s4_q5_3', label:'Mes', type:'select', },
-                    { id:'s4_q5_4', label:'Año', type:'numberber', },
-                    // { name:'s4_q5_5', id:'s4_q5_5_1', label:'Si', type:'radio', },
-                    // { name:'s4_q5_5', id:'s4_q5_5_2', label:'No', type:'radio', },
-                    { id:'s4_q5_6', label:'Tipo de tratamiento (quirúrgico, médico o de rehabilitación). Especifique', type:'text', },
-                    { id:'s4_q5_7', label:'Estado actual de salud', type:'text', },
-                    { id:'s4_q5_8', label:'¿Quedó con alguna complicación?', type:'text', },
-                    { id:'s4_q5_9', label:'¿Actualmente toma algún medicamento?. Especifique', type:'text', },
-                ],
+            
+                
                 pregnantSection:{
                     question:'¿Algúna Solicitante está actualmente embarazada?',
                     radioFields:[

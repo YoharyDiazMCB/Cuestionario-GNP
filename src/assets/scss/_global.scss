@@ -246,7 +246,7 @@ a:hover{
     transition: var(--transition-1);
     flex-grow: 1;
 }
-.mcb-field{
+fieldset, .mcb-field{
     display: flex;
     flex-direction: column;
     gap: 10px;

@@ -3,7 +3,7 @@ import '../scss/_FormStepper.scss'
 import Section1 from "../../pages/FormSections/Section1";
 import Section2 from "../../pages/FormSections/Section2";
 import Section3 from "../../pages/FormSections/Section3";
-import { use } from "react";
+import Section4 from '../../pages/FormSections/Section4';
 
 export default function FormContStep({stepsArray, activeStep, setActiveStep}){
     const lastStep=stepsArray.length-1;
@@ -25,25 +25,13 @@ export default function FormContStep({stepsArray, activeStep, setActiveStep}){
         s1_q2: { value:'', required:false, },
 
         // ? section3
-        s3_q1: { value: false, required:false, },
-        s3_q1_1: { value:'', required:false, },
-        s3_q1_2: { value:'', required:false, },
+        s3_q1: { value: false , required:false, },
         
-        s3_q2: { value:'', required:false, },
-        s3_q3: { value:'', required:false, },
-        s3_q4: { value:'', required:false, },
-        s3_q5: { value:'', required:false, },
 
         // ? section 4
-        s4_q1: { value:'', required:false, }, // ! radio
-        s4_q1_1: { value:'', required:false, }, // ! radio
-        s4_q1_2: { value:'', required:false, }, // ! radio
-        s4_q2: { value:'', required:false, }, // ! radio
-        s4_q2_1: { value:'', required:false, }, // ! radio
-        s4_q2_2: { value:'', required:false, }, // ! radio
-        s4_q3: { value:'', required:false, }, // ! radio
-        s4_q3_1: { value:'', required:false, }, // ! radio
-        s4_q3_2: { value:'', required:false, }, // ! radio
+        s4_q1: { value:false, required:false, }, // ! radio
+        s4_q2: { value:false, required:false, }, // ! radio
+        s4_q3: { value:false, required:false, }, // ! radio
         s4_q4_1: { value:'', required:false, },
         s4_q4_2: { value:'', required:false, }, // ! radio
         s4_q4_2_1: { value:'', required:false, }, // ! radio
@@ -53,15 +41,7 @@ export default function FormContStep({stepsArray, activeStep, setActiveStep}){
         s4_q4_4_1: { value:'', required:false, }, // ! radio
         s4_q4_4_2: { value:'', required:false, }, // ! radio
         s4_q4_5: { value:'', required:false, },
-        s4_q5_1: { value:'', required:false, },
-        s4_q5_2: { value:'', required:false, },
-        s4_q5_3: { value:'', required:false, },
-        s4_q5_4: { value:'', required:false, },
-        s4_q5_5: { value:'', required:false, }, // ! radio
-        s4_q5_6: { value:'', required:false, },
-        s4_q5_7: { value:'', required:false, },
-        s4_q5_8: { value:'', required:false, },
-        s4_q5_9: { value:'', required:false, },
+        
 
         // ? section 5
         s5_q1: { value:'', required:false, },
@@ -92,9 +72,9 @@ export default function FormContStep({stepsArray, activeStep, setActiveStep}){
         s7_q8: { value:'', required:false, },
     };
     const solicitanteDefault={
-            s2_q1: { value:'', required:false, },
-            s2_q2: { value:'', required:false, },
-            s2_q3: { value:'', required:false, },
+            s2_q1: { value:'Navarro', required:false, },
+            s2_q2: { value:'Sanchez', required:false, },
+            s2_q3: { value:'M', required:false, },
             s2_q4: { value:'', required:false, },
             s2_q5: { value:'', required:false, },
             s2_q6: { value:'', required:false, }, // ! RADIO
@@ -116,9 +96,28 @@ export default function FormContStep({stepsArray, activeStep, setActiveStep}){
         s2_1_q6: { value:'', required:false, },
         s2_1_q7: { value:'', required:false, },
     }
+    const solicitanteS3Default={
+        s3_q2: { value:'', required:false, },
+        s3_q3: { value:'sample', required:false, },
+        s3_q4: { value:'', required:false, },
+        s3_q5: { value:'', required:false, },
+    }
+    const solicitanteS4Default={
+        s4_q5_1: { value:'', required:false, },
+        s4_q5_2: { value:'', required:false, },
+        s4_q5_3: { value:'', required:false, },
+        s4_q5_4: { value:'', required:false, },
+        s4_q5_5: { value:'', required:false, }, // ! radio
+        s4_q5_6: { value:'', required:false, },
+        s4_q5_7: { value:'', required:false, },
+        s4_q5_8: { value:'', required:false, },
+        s4_q5_9: { value:'', required:false, },
+    }
     const defaultValuesSolicitantes={
         solicitantes:[solicitanteDefault],
-        solicitantesViajeros:[]
+        solicitantesViajeros:[],
+        solicitantesSeccion3:[],
+        solicitantesSeccion4:[],
     }
 
     const [formValue, setFormValue]=useState(defaultValues)
@@ -187,7 +186,25 @@ export default function FormContStep({stepsArray, activeStep, setActiveStep}){
                 )
             case 2:
                 return(
-                    <Section3 title={stepsArray[2]}></Section3>
+                    <Section3 title={stepsArray[2] }  
+                        formValues={formValue} 
+                        setFormValues={setFormValue} 
+                        solicitante={solicitantesValues} 
+                        setSolicitante={setSolicitantesValues} 
+                        solicitanteS3Default={solicitanteS3Default}                 
+                    ></Section3>
+                )
+            case 3:
+                return(
+                    <Section4 title={stepsArray[3]}
+                        formValues={formValue} 
+                        setFormValues={setFormValue} 
+                        solicitante={solicitantesValues} 
+                        setSolicitante={setSolicitantesValues} 
+                        solicitanteS4Default={solicitanteS4Default}
+                    >
+
+                    </Section4>
                 )
             default:
                 return(

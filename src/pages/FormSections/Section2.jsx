@@ -42,26 +42,24 @@ export default function Section2({
 
     const letraSolicitante=['A','B','C','D'];
 
-    const handleChange = (e, solicitanteIndex) => {
+    const handleChange = (e, solicitanteIndex, radioValue=null) => {
         let { id, name, value: inputValue, type, checked } = e.target;
-        const key = name || id;
+        let key = name || id;
+        if(radioValue != null){
+            key=radioValue;
+        }
         
         setSolicitante(prevFormData => {
             const nuevosSolicitantes = [...prevFormData.solicitantes];
-            
-            // 2. Crear una copia del solicitante específico que está cambiando
             const solicitanteAActualizar = { ...nuevosSolicitantes[solicitanteIndex] };
-            
-            // 3. Actualizar el campo específico dentro de ese solicitante
+
             solicitanteAActualizar[key] = { 
                 ...solicitanteAActualizar[key],
                 value: inputValue,              // Actualizar 'value'
             };
 
-            // 4. Reemplazar el solicitante antiguo por el actualizado en el array de copias
             nuevosSolicitantes[solicitanteIndex] = solicitanteAActualizar;
-
-            // 5. Devolver el nuevo estado con el array de solicitantes actualizado
+            
             return {
                 ...prevFormData,
                 solicitantes: nuevosSolicitantes
@@ -123,18 +121,22 @@ export default function Section2({
                                     )
                                 }else{
                                     return(
-                                        <FormField 
-                                            fieldData={field} 
-                                            fieldKey={fieldIndex} 
-                                            fieldValue={i[field.id].value} 
-                                            handleChange={(e)=>handleChange(e, index)}>
-                                        </FormField>
+                                        <div key={fieldIndex}>
+                                            <FormField 
+                                                fieldData={field} 
+                                                fieldKey={index} 
+                                                fieldValue={i[field.id].value} 
+                                                handleChange={(e)=>handleChange(e, index , field.id)}>
+                                            </FormField>
+                                        </div>
                                     )
                                 }
                             })}
                     </section>
+                    {/* <p>{solicitante.solicitantes[index].s2_q6.value}</p> */}
                 </div>
             ))}
+            
             <hr />              
             <p className='mcb-fs-20 mcb-fw-6'>Viajes al extranjero</p>
             <div className="mcb-flex mcb-gap-30 mcb-jc-sb mqm-col">
@@ -144,7 +146,7 @@ export default function Section2({
             {solicitante.solicitantesViajeros.map((i, index)=>(
                 <section key={index} className="mcb-grid-4 mcb-ai-fe">
                     <fieldset className="mcb-flex-c mcb-gap-10">
-                        <label htmlFor="" className="mcb-label">Solicitante que viaja</label>
+                        <label htmlFor="s2_1_q0" className="mcb-label">Solicitante que viaja</label>
                         <select name="s2_1_q0" id="s2_1_q0" value={i.s2_1_q0.value}  onChange={(e)=>handleViajero(e, index)} className='mcb-input'>
                             <option value="" disabled>Seleccione una opción</option>
                             {solicitante.solicitantes.map((i, index)=>(
