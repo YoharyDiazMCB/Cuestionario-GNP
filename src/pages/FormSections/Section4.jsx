@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import FormField from "../../assets/components/FormField";
+import { AddButton } from "../../assets/components/AddButton";
+import { RemoveButton } from "../../assets/components/RemoveButton";
 
 export default function Section4({
     title,    
@@ -35,11 +37,11 @@ export default function Section4({
         { id:'s4_q5_2', label:'Enfermedad o accidente', type:'text', },
         { id:'s4_q5_3', label:'Mes', type:'select', },
         { id:'s4_q5_4', label:'Año', type:'number', },
-        { id:'s4_q5_6', name:'s4_q5_6', label:'¿Estuvo hospitalizado?', type:'yesOrNot', },
-        { id:'s4_q5_7', label:'Tipo de tratamiento (quirúrgico, médico o de rehabilitación). Especifique', type:'text', },
-        // { id:'s4_q5_7', label:'Estado actual de salud', type:'text', },
-        // { id:'s4_q5_8', label:'¿Quedó con alguna complicación?', type:'text', },
-        // { id:'s4_q5_9', label:'¿Actualmente toma algún medicamento?. Especifique', type:'text', },
+        { id:'s4_q5_5', name:'s4_q5_5', label:'¿Estuvo hospitalizado?', type:'yesOrNot', },
+        { id:'s4_q5_6', label:'Tipo de tratamiento (quirúrgico, médico o de rehabilitación). Especifique', type:'text', },
+        { id:'s4_q5_7', label:'Estado actual de salud', type:'text', },
+        { id:'s4_q5_8', name:'s4_q5_8', label:'¿Quedó con alguna complicación?', type:'yesOrNot', },
+        { id:'s4_q5_9', label:'¿Actualmente toma algún medicamento?. Especifique', type:'text', },
     ];
     
     const addSolicitanteS4=()=>{
@@ -95,9 +97,13 @@ export default function Section4({
         }
     };
 
-    const handleChange = (e, solicitanteIndex) => {
+    const handleChange = (e, solicitanteIndex, fieldId=null) => {
         let { id, name, value: inputValue, type, checked } = e.target;
-        const key = name || id;
+        let key = name || id;
+        
+        if(fieldId != null){
+            key=fieldId;
+        }
         
         setSolicitante(prevFormData => {
             const nuevosSolicitantes = [...prevFormData.solicitantesSeccion4];
@@ -116,6 +122,9 @@ export default function Section4({
             };
         });
     }
+
+    const letraSolicitante=['A','B','C','D'];
+    
     return(
         <>
             <h2>{title}</h2>
@@ -127,60 +136,67 @@ export default function Section4({
                     handleChange={(e)=>handleChangeQuestions(e)}>
                 </FormField>
             ))}
-            <p>Solicitantes de la S4: {solicitante.solicitantesSeccion4.length}</p>
 
             {solicitante.solicitantesSeccion4.map((i, index)=>(
-                <section className="mcb-grid-4 mcb-ai-fe" key={index}>
-                    {fields.map((field, fieldIndex)=>(
-                        <FormField 
-                            key={fieldIndex}
-                            fieldData={field} 
-                            fieldKey={fieldIndex} 
-                            fieldValue={i[field.id].value} 
-                            solicitantes={solicitante} 
-                            arrayDatos={'solicitantesSeccion4'}
-                            handleChange={(e)=>handleChange(e, index)}
-                        >
-                        </FormField>
-                    ))}
-                </section>
+                <div key={index} className="mcb-flex-c mcb-gap-20">
+                    <div className="mcb-flex mcb-gap-20 mcb-jc-sb">
+                        <p className="mcb-fs-18 mcb-fw-6">Información médica del Solicitante {letraSolicitante[i.s4_q5_1.value]}</p>
+                        <RemoveButton title={'Descartar solicitante'} onClick={()=>removeSolicitanteS4(index)}></RemoveButton>
+                    </div>
+                    <section className="mcb-grid-4 mcb-ai-fe" >
+                        {fields.map((field, fieldIndex)=>{
+                            if(fieldIndex<=4){
+                                return(
+                                    <FormField 
+                                        key={fieldIndex}
+                                        fieldData={field} 
+                                        fieldKey={fieldIndex} 
+                                        fieldValue={i[field.id].value} 
+                                        solicitantes={solicitante} 
+                                        arrayDatos={'solicitantesSeccion4'}
+                                        handleChange={(e)=>handleChange(e, index, field.id)}
+                                    >
+                                    </FormField>
+                                )
+                            }
+                            // ! renderizado en caso de que el solicitante haya sido hospitalizado
+                            if( fieldIndex===5 && i['s4_q5_5'].value ==='true'){
+                                return(
+                                    <FormField 
+                                        key={fieldIndex}
+                                        fieldData={field} 
+                                        fieldKey={fieldIndex} 
+                                        fieldValue={i[field.id].value} 
+                                        solicitantes={solicitante} 
+                                        arrayDatos={'solicitantesSeccion4'}
+                                        handleChange={(e)=>handleChange(e, index, field.id)}
+                                    >
+                                    </FormField>
+                                )
+                            }
+                            if(fieldIndex>5){
+                                return(
+                                    <FormField 
+                                        key={fieldIndex}
+                                        fieldData={field} 
+                                        fieldKey={fieldIndex} 
+                                        fieldValue={i[field.id].value} 
+                                        solicitantes={solicitante} 
+                                        arrayDatos={'solicitantesSeccion4'}
+                                        handleChange={(e)=>handleChange(e, index, field.id)}
+                                    >
+                                    </FormField>
+                                )
+                            }
+                        })}
+                        
+                    </section>
+                    {solicitante.solicitantesSeccion4.length>1 &&( <hr /> )}
+                </div>
             ))}
-                            {/* <h2>{sectionData.title}</h2>
-                            {sectionData.questions.map((q, qIndex)=>(
-                                <div key={qIndex}>
-                                    <p className="mcb-color-b3">{q.question}</p>
-                                    <fieldset className="mcb-flex mcb-gap-30" >
-                                        {q.fields.map((field, fieldIndex)=>(
-                                            renderField(field, fieldIndex)
-                                        ))}
-                                        
-                                    </fieldset>
-                                </div>
-                            ))}
-
-                            {(
-                                valueForm.s4_q1.value === 'true' || 
-                                valueForm.s4_q2.value === 'true' || 
-                                valueForm.s4_q3.value === 'true') &&(
-                                    <div className='mcb-grid-4'>
-                                        {sectionData.fields.map((field, fieldIndex)=>(
-                                            renderField(field, fieldIndex)
-                                        ))}
-                                    </div>
-                            )}
-                            <p className="mcb-fs-20 mcb-fw-6">{sectionData.pregnantSection.question}</p>
-                            <fieldset className="mcb-flex mcb-gap-30">
-                                {sectionData.pregnantSection.radioFields.map((field, fieldIndex)=>(
-                                    renderField(field, fieldIndex)
-                                ))}
-                            </fieldset>
-                            {valueForm.s4_q4_2.value==='true' && (
-                                <div className='mcb-grid-4'>
-                                    {sectionData.pregnantSection.fields.map((field, fieldIndex)=>(
-                                        renderField(field, fieldIndex)
-                                    ))}
-                                </div>
-                            )} */}
-                        </>
+            {(solicitante.solicitantesSeccion4.length>0 && solicitante.solicitantesSeccion4.length<solicitante.solicitantes.length) && (
+                <AddButton title={'Agregar otro solicitante'} onClick={addSolicitanteS4}></AddButton>
+            )}
+        </>
     )
 }

@@ -72,9 +72,9 @@ export default function FormContStep({stepsArray, activeStep, setActiveStep}){
         s7_q8: { value:'', required:false, },
     };
     const solicitanteDefault={
-            s2_q1: { value:'Navarro', required:false, },
-            s2_q2: { value:'Sanchez', required:false, },
-            s2_q3: { value:'M', required:false, },
+            s2_q1: { value:'Sanchez', required:false, },
+            s2_q2: { value:'Navarro', required:false, },
+            s2_q3: { value:'Michelle', required:false, },
             s2_q4: { value:'', required:false, },
             s2_q5: { value:'', required:false, },
             s2_q6: { value:'', required:false, }, // ! RADIO
@@ -107,7 +107,7 @@ export default function FormContStep({stepsArray, activeStep, setActiveStep}){
         s4_q5_2: { value:'', required:false, },
         s4_q5_3: { value:'', required:false, },
         s4_q5_4: { value:'', required:false, },
-        s4_q5_5: { value:'', required:false, }, // ! radio
+        s4_q5_5: { value:'', required:false, }, // ! Estuvo hospitalizado?
         s4_q5_6: { value:'', required:false, },
         s4_q5_7: { value:'', required:false, },
         s4_q5_8: { value:'', required:false, },

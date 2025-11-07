@@ -92,10 +92,7 @@ export default function Section2({
 
     return(
         <>
-            <div className="mcb-flex mcb-gap-30 mcb-jc-sb">
-                <h2>{title}</h2>
-                <AddButton title='Agregar solicitante' onClick={addSolicitante}></AddButton>
-            </div>
+            <h2>{title}</h2>
             
             {solicitante.solicitantes.map((i, index)=>(
                 <div key={index} className="mcb-flex-c mcb-gap-20">
@@ -133,16 +130,21 @@ export default function Section2({
                                 }
                             })}
                     </section>
+                    {solicitante.solicitantes.length>1 &&(
+                        <hr />
+
+                    )}
                     {/* <p>{solicitante.solicitantes[index].s2_q6.value}</p> */}
                 </div>
             ))}
+
+            {solicitante.solicitantes.length<4 && (
+                <AddButton title='Agregar solicitante' onClick={addSolicitante}></AddButton>
+            )}
             
-            <hr />              
             <p className='mcb-fs-20 mcb-fw-6'>Viajes al extranjero</p>
-            <div className="mcb-flex mcb-gap-30 mcb-jc-sb mqm-col">
-                <p className='mcb-color-b3 mcb-w-6'>Si alguno de los Solicitantes va a viajar al extranjero en los próximos 6 meses con una permanencia mayor a 3 meses, indíquelo a continuación anotando la letra del solicitante que corresponda (A,B,C,D)</p>
-                <AddButton title='Agregar solicitante que viaja' onClick={addViajero}></AddButton>
-            </div>
+            <p className='mcb-color-b3'>Si alguno de los Solicitantes va a viajar al extranjero en los próximos 6 meses con una permanencia mayor a 3 meses, indíquelo a continuación anotando la letra del solicitante que corresponda (A,B,C,D)</p>
+            
             {solicitante.solicitantesViajeros.map((i, index)=>(
                 <section key={index} className="mcb-grid-4 mcb-ai-fe">
                     <fieldset className="mcb-flex-c mcb-gap-10">
@@ -200,6 +202,7 @@ export default function Section2({
                     <RemoveButton title={'Eliminar solicitante viajero'} onClick={()=>removeViajero(index)}></RemoveButton>
                 </section>
             ))}
+            <AddButton title='Agregar solicitante que viaja' onClick={addViajero}></AddButton>
         </>
     )
 }

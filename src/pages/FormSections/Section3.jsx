@@ -96,7 +96,8 @@ export default function Section3({
             };
         });
     }
-    
+    const letraSolicitante=['A','B','C','D'];
+
     return(
         <>
             <h2>{title}</h2>
@@ -112,26 +113,35 @@ export default function Section3({
                 ))}
             </ol>
             
+            {solicitante.solicitantesSeccion3.map((i, index)=>(
+                <div className="mcb-flex-c mcb-gap-20" key={index}>
+                    <div className="mcb-flex mcb-gap-20 mcb-jc-sb">
+                        <p className="mcb-fs-18 mcb-fw-6">Información de la ocupación del Solicitante {letraSolicitante[i.s3_q2.value]}</p>
+                        <RemoveButton title={'Descartar solicitante'} onClick={()=>removeSolicitanteS3(index)}></RemoveButton>
+                    </div>
+                    <section className="mcb-grid-4 mcb-ai-fe">
+                        { fields.map((field, fieldIndex)=>(
+                            <FormField 
+                                key={fieldIndex}
+                                fieldData={field} 
+                                fieldKey={fieldIndex} 
+                                fieldValue={i[field.id].value} 
+                                solicitantes={solicitante} 
+                                arrayDatos={'solicitantesSeccion3'}
+                                handleChange={(e)=>handleChange(e, index)}
+                            >
+                            </FormField>
+                        ))}
+                    </section>
+                    {solicitante.solicitantesSeccion3.length>1 &&(
+                        <hr />
+                    )}
+                </div>
+            ))}
+
             {(solicitante.solicitantesSeccion3.length<solicitante.solicitantes.length && formValues.s3_q1.value==='true' ) &&(
                 <AddButton title={'Agregar otro solicitante'} onClick={addSolicitanteS3}></AddButton>
             )}
-            {solicitante.solicitantesSeccion3.map((i, index)=>(
-                <section className="mcb-grid-4 mcb-ai-fe" key={index}>
-                    { fields.map((field, fieldIndex)=>(
-                        <FormField 
-                            key={fieldIndex}
-                            fieldData={field} 
-                            fieldKey={fieldIndex} 
-                            fieldValue={i[field.id].value} 
-                            solicitantes={solicitante} 
-                            arrayDatos={'solicitantesSeccion3'}
-                            handleChange={(e)=>handleChange(e, index)}
-                        >
-                        </FormField>
-                    ))}
-                    <RemoveButton title={'Descartar solicitante'} onClick={()=>removeSolicitanteS3(index)}></RemoveButton>
-                </section>
-            ))}
         </>
     )
 }
